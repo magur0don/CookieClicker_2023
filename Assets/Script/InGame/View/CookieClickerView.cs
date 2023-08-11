@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// 表示に関することはこのクラスに集約する
 /// </summary>
 public class CookieClickerView : MonoBehaviour
 {
-    public Text cookieCountText;
+    public TextMeshProUGUI cookieCountText;
     public Button clickButton;
 
     public void UpdateCookieCount(int count)
