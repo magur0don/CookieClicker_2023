@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 /// <summary>
-/// •\¦‚ÉŠÖ‚·‚é‚±‚Æ‚Í‚±‚ÌƒNƒ‰ƒX‚ÉW–ñ‚·‚é
+/// è¡¨ç¤ºã«é–¢ã™ã‚‹ã“ã¨ã¯ã“ã®ã‚¯ãƒ©ã‚¹ã«é›†ç´„ã™ã‚‹
 /// </summary>
 public class CookieClickerView : MonoBehaviour
 {
@@ -20,5 +20,10 @@ public class CookieClickerView : MonoBehaviour
     public void SetClickButtonAction(System.Action onClick)
     {
         clickButton.onClick.AddListener(() => onClick.Invoke());
+    }
+
+    public void SetButtonImage(Sprite cookieSprite)
+    {
+        clickButton.image.sprite = cookieSprite;
     }
 }

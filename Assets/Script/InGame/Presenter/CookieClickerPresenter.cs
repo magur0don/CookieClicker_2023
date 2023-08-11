@@ -13,12 +13,15 @@ public class CookieClickerPresenter : MonoBehaviour
 
     private void Start()
     {
+
         cookieClickerModel = new CookieClickerModel();
         cookieClickerModel.LoadCookieClickCount();
+        cookieClickerModel.LoadCookieImage();
 
         cookieClickerView = GetComponent<CookieClickerView>();
 
         cookieClickerView.SetClickButtonAction(OnClickCookie);
+        cookieClickerView.SetButtonImage(cookieClickerModel.GetCookieImageSprite);
         UpdateCookieUI();
     }
 

@@ -9,10 +9,19 @@ using UnityEngine;
 public class CookieClickerModel
 {
     private int cookieClickCount;
-
     public int GetcookieClickCount()
     {
         return cookieClickCount;
+    }
+
+    private Sprite cookieImageSprite;
+
+    public Sprite GetCookieImageSprite
+    {
+        get
+        {
+            return cookieImageSprite;
+        }
     }
 
     public void AddCookieClickCount(int amount)
@@ -30,11 +39,19 @@ public class CookieClickerModel
     {
         var loadPlayerData = JsonSaveUtility.Load<PlayerSaveData>();
         // ï€ë∂ÇµÇƒÇ¢ÇÈÉfÅ[É^Ç™Ç†ÇÈèÍçá
-        if (loadPlayerData  != null)
+        if (loadPlayerData != null)
         {
             cookieClickCount = loadPlayerData.PlayerScore;
             return;
         }
         cookieClickCount = 0;
     }
+
+    public void LoadCookieImage()
+    {
+        var cookieSprite = AddressableAssetLoadUtility.Instance.LoadAssetAsync<Sprite>("CookieImage_0");
+        cookieImageSprite = cookieSprite;
+    }
+
+
 }
