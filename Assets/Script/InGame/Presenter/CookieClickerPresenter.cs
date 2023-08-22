@@ -11,21 +11,23 @@ public class CookieClickerPresenter : MonoBehaviour
     private CookieClickerModel cookieClickerModel;
     private CookieClickerView cookieClickerView;
 
-    private void Start()
+    private async void Start()
     {
 
         cookieClickerModel = new CookieClickerModel();
         cookieClickerModel.LoadCookieClickCount();
-
-
 
         IEnumerable assetslabel = new object[]
         {
             "CookieImages"
         };
 
-        StartCoroutine(AddressableAssetLoadUtility.Instance.CheckCatalogUpdates());
-        StartCoroutine(AddressableAssetLoadUtility.Instance.GetDownloadSize(assetslabel));
+        // ‚±‚±‚ÅUnitask‚ðŽg‚Á‚Ä‘Ò‚Â
+        await AddressableAssetLoadUtility.Instance.CheckCatalogUpdates();
+
+
+        await AddressableAssetLoadUtility.Instance.GetDownloadSize(assetslabel);
+
 
         cookieClickerModel.LoadCookieImage();
 
