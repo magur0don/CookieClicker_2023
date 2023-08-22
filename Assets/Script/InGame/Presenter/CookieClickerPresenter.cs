@@ -16,6 +16,17 @@ public class CookieClickerPresenter : MonoBehaviour
 
         cookieClickerModel = new CookieClickerModel();
         cookieClickerModel.LoadCookieClickCount();
+
+
+
+        IEnumerable assetslabel = new object[]
+        {
+            "CookieImages"
+        };
+
+        StartCoroutine(AddressableAssetLoadUtility.Instance.CheckCatalogUpdates());
+        StartCoroutine(AddressableAssetLoadUtility.Instance.GetDownloadSize(assetslabel));
+
         cookieClickerModel.LoadCookieImage();
 
         cookieClickerView = GetComponent<CookieClickerView>();
@@ -34,6 +45,15 @@ public class CookieClickerPresenter : MonoBehaviour
     private void UpdateCookieUI()
     {
         cookieClickerView.UpdateCookieCount(cookieClickerModel.GetcookieClickCount());
+    }
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            StartCoroutine(AddressableCacheClearUtility.Instance.StartCacheClear());
+        }
     }
 
     /// <summary>
