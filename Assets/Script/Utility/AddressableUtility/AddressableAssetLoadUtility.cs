@@ -1,17 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class AddressableAssetLoadUtility : SingletonMonoBehaviour<AddressableAssetLoadUtility>
 {
+
+    AsyncOperationHandle assetOperation = new AsyncOperationHandle();
     public T LoadAssetAsync<T>(string address) where T : Object
     {
-        var assetOperation = Addressables.LoadAssetAsync<T>(address);
+        assetOperation = Addressables.LoadAssetAsync<T>(address);
         var asset = assetOperation.WaitForCompletion();
-        Addressables.Release(assetOperation);
-        return asset;
+        return (T)asset;
+    }
+
+    private void OnDestroy()
+    {
+        if (assetOperation.IsValid()) 
+        {
+            Addressables.Release(assetOperation);
+        }
     }
 }

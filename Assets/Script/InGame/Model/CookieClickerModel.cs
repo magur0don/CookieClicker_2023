@@ -13,7 +13,7 @@ public class CookieClickerModel
     {
         return cookieClickCount;
     }
-
+    [SerializeField]
     private Sprite cookieImageSprite;
 
     public Sprite GetCookieImageSprite
