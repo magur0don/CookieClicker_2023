@@ -1038,7 +1038,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 5226195081395872106, guid: e8cf14fdd52324e4f9f5ab70bceaf619, type: 3}
   m_LeftButtonAction:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
       m_Name: Left Button
       m_Type: 0
@@ -1046,9 +1046,17 @@ MonoBehaviour:
       m_Id: 0fb532c8-dfa9-4fe0-baba-5b1cde7f2e6c
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 347809db-8dfe-4562-b05a-f141da221938
+        m_Path: <Gamepad>/buttonSouth
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Left Button
+        m_Flags: 0
       m_Flags: 0
-    m_Reference: {fileID: 1656461853720441326, guid: e8cf14fdd52324e4f9f5ab70bceaf619, type: 3}
+    m_Reference: {fileID: 9196277681548931320, guid: e8cf14fdd52324e4f9f5ab70bceaf619, type: 3}
   m_MiddleButtonAction:
     m_UseReference: 0
     m_Action:

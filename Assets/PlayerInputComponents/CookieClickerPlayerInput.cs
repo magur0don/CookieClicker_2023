@@ -35,6 +35,15 @@ public partial class @CookieClickerPlayerInput: IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MouseClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f9c6d93-68cd-416b-a7f1-ca02050b9f8c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -103,6 +112,17 @@ public partial class @CookieClickerPlayerInput: IInputActionCollection2, IDispos
                     ""action"": ""MouseMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""30bb3bab-e7bb-4b27-8500-7a667745a1a5"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -112,6 +132,7 @@ public partial class @CookieClickerPlayerInput: IInputActionCollection2, IDispos
         // GamePlay
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_MouseMove = m_GamePlay.FindAction("MouseMove", throwIfNotFound: true);
+        m_GamePlay_MouseClick = m_GamePlay.FindAction("MouseClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -174,11 +195,13 @@ public partial class @CookieClickerPlayerInput: IInputActionCollection2, IDispos
     private readonly InputActionMap m_GamePlay;
     private List<IGamePlayActions> m_GamePlayActionsCallbackInterfaces = new List<IGamePlayActions>();
     private readonly InputAction m_GamePlay_MouseMove;
+    private readonly InputAction m_GamePlay_MouseClick;
     public struct GamePlayActions
     {
         private @CookieClickerPlayerInput m_Wrapper;
         public GamePlayActions(@CookieClickerPlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @MouseMove => m_Wrapper.m_GamePlay_MouseMove;
+        public InputAction @MouseClick => m_Wrapper.m_GamePlay_MouseClick;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -191,6 +214,9 @@ public partial class @CookieClickerPlayerInput: IInputActionCollection2, IDispos
             @MouseMove.started += instance.OnMouseMove;
             @MouseMove.performed += instance.OnMouseMove;
             @MouseMove.canceled += instance.OnMouseMove;
+            @MouseClick.started += instance.OnMouseClick;
+            @MouseClick.performed += instance.OnMouseClick;
+            @MouseClick.canceled += instance.OnMouseClick;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -198,6 +224,9 @@ public partial class @CookieClickerPlayerInput: IInputActionCollection2, IDispos
             @MouseMove.started -= instance.OnMouseMove;
             @MouseMove.performed -= instance.OnMouseMove;
             @MouseMove.canceled -= instance.OnMouseMove;
+            @MouseClick.started -= instance.OnMouseClick;
+            @MouseClick.performed -= instance.OnMouseClick;
+            @MouseClick.canceled -= instance.OnMouseClick;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -218,5 +247,6 @@ public partial class @CookieClickerPlayerInput: IInputActionCollection2, IDispos
     public interface IGamePlayActions
     {
         void OnMouseMove(InputAction.CallbackContext context);
+        void OnMouseClick(InputAction.CallbackContext context);
     }
 }
