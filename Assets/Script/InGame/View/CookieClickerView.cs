@@ -20,7 +20,7 @@ public class CookieClickerView : MonoBehaviour
     {
         clickButton.onClick.AddListener(() =>
         {
-            ClickReference.action.performed += context => onClick.Invoke();
+           onClick.Invoke();
         });
     }
 

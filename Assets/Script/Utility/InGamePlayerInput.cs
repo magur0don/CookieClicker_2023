@@ -6,6 +6,5 @@ using UnityEngine.InputSystem;
 public class InGamePlayerInput : MonoBehaviour
 {
     // Actionをインスペクターから編集できるようにする
-    [SerializeField] private InputActionReference mouseMove;
-
+   
 }
