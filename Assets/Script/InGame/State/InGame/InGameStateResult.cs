@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InGameStateResult : InGameState
 {
-    public InGameStateResult(InGameStateMachine stateMachine) : base(stateMachine)
+    public InGameStateResult(InGameStateMachine stateMachine, CookieClickerPresenter cookieClickerPresenter) : base(stateMachine, cookieClickerPresenter)
     {
     }
 

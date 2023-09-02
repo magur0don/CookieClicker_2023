@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InGameStateMachine : MonoBehaviour
+public class InGameStateMachine
 {
     private InGameState currentState;
 

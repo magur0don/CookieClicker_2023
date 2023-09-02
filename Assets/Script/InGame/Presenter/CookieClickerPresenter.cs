@@ -1,51 +1,59 @@
+ï»¿using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// ƒf[ƒ^‚ÆUI‚Ì’‡‰î‚ğs‚¤
+/// ãƒ‡ãƒ¼ã‚¿ã¨UIã®ä»²ä»‹ã‚’è¡Œã†
 /// </summary>
 public class CookieClickerPresenter : MonoBehaviour
 {
 
-    private CookieClickerModel cookieClickerModel;
-    private CookieClickerView cookieClickerView;
+    internal CookieClickerModel cookieClickerModel;
+    internal CookieClickerView cookieClickerView;
 
-    private async void Start()
+    private InGameStateMachine stateMachine;
+
+    public InGameStateMachine GetMainGameState
     {
-
-        cookieClickerModel = new CookieClickerModel();
-        cookieClickerModel.LoadCookieClickCount();
-
-        IEnumerable assetslabel = new object[]
-        {
-            "CookieImages"
-        };
-
-        // ‚±‚±‚ÅUnitask‚ğg‚Á‚Ä‘Ò‚Â
-        await AddressableAssetLoadUtility.Instance.CheckCatalogUpdates();
-
-
-        await AddressableAssetLoadUtility.Instance.GetDownloadSize(assetslabel);
-
-
-        cookieClickerModel.LoadCookieImage();
-
-        cookieClickerView = GetComponent<CookieClickerView>();
-
-        cookieClickerView.SetClickButtonAction(OnClickCookie);
-        cookieClickerView.SetButtonImage(cookieClickerModel.GetCookieImageSprite);
-        UpdateCookieUI();
+        get { return stateMachine; }
     }
 
-    private void OnClickCookie()
+    public InGameStateInit InGameStateInit;
+    public InGameStateStart InGameStateStart;
+
+    // MainGameéƒ¨åˆ†
+    public InGameStateMain InGameStateMain;
+
+    // ã‚²ãƒ¼ãƒ ãƒªã‚¶ãƒ«ãƒˆ
+    public InGameStateResult InGameStateResult;
+    public InGameStateEnd InGameStateEnd;
+
+    private void Start()
+    {
+        stateMachine = new InGameStateMachine();
+
+        InGameStateInit = new InGameStateInit(stateMachine, this);
+        InGameStateStart = new InGameStateStart(stateMachine, this);
+
+        InGameStateMain = new InGameStateMain(stateMachine, this);
+
+        InGameStateResult = new InGameStateResult(stateMachine, this);
+        InGameStateEnd = new InGameStateEnd(stateMachine, this);
+
+        // Initã‹ã‚‰ã‚¹ã‚¿ãƒ¼ãƒˆã™ã‚‹
+        stateMachine.ChangeState(InGameStateInit);
+
+    }
+
+    public void OnClickCookie()
     {
         cookieClickerModel.AddCookieClickCount(1);
         UpdateCookieUI();
     }
 
-    private void UpdateCookieUI()
+    public void UpdateCookieUI()
     {
         cookieClickerView.UpdateCookieCount(cookieClickerModel.GetcookieClickCount());
     }
@@ -53,6 +61,11 @@ public class CookieClickerPresenter : MonoBehaviour
 
     private void Update()
     {
+        if (stateMachine != null)
+        {
+            stateMachine.Update();
+        }
+
         if (Input.GetKeyDown(KeyCode.Delete))
         {
             StartCoroutine(AddressableCacheClearUtility.Instance.StartCacheClear());
@@ -60,7 +73,7 @@ public class CookieClickerPresenter : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒQ[ƒ€‚ªI—¹‚·‚é‚©AƒV[ƒ“‚ª‘JˆÚ‚µ‚½‚Æ‚«‚ÉƒZ[ƒu‚ğs‚¤
+    /// ã‚²ãƒ¼ãƒ ãŒçµ‚äº†ã™ã‚‹ã‹ã€ã‚·ãƒ¼ãƒ³ãŒé·ç§»ã—ãŸã¨ãã«ã‚»ãƒ¼ãƒ–ã‚’è¡Œã†
     /// </summary>
     private void OnDestroy()
     {

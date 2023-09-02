@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -46,6 +47,22 @@ public class CookieClickerModel
         }
         cookieClickCount = 0;
     }
+
+    public bool LoadedAsset = false;
+
+    public async UniTask Load()
+    {
+        LoadedAsset = false;
+        IEnumerable assetslabel = new object[]
+        {
+            "CookieImages"
+        };
+        // ‚±‚±‚ÅUnitask‚ðŽg‚Á‚Ä‘Ò‚Â
+        await AddressableAssetLoadUtility.Instance.CheckCatalogUpdates();
+        await AddressableAssetLoadUtility.Instance.GetDownloadSize(assetslabel);
+        LoadedAsset = true;
+    }
+
 
     public void LoadCookieImage()
     {

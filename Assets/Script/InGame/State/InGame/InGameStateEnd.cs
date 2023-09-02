@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class InGameStateEnd : InGameState
 {
-    public InGameStateEnd(InGameStateMachine stateMachine) : base(stateMachine)
+    public InGameStateEnd(InGameStateMachine stateMachine, 
+        CookieClickerPresenter cookieClickerPresenter) : base(stateMachine, cookieClickerPresenter)
     {
     }
 
