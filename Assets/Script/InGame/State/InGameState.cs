@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class InGameState : MonoBehaviour
+public class InGameState 
 {
     protected InGameStateMachine stateMachine;
 
