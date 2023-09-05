@@ -21,8 +21,12 @@ public class AddressableAssetLoadUtility : SingletonMonoBehaviour<AddressableAss
     public T LoadAssetAsync<T>(string address) where T : Object
     {
         assetOperation = Addressables.LoadAssetAsync<T>(address);
-        var asset = assetOperation.WaitForCompletion();
-        return (T)asset;
+        if (assetOperation.IsValid())
+        {
+            var asset = assetOperation.WaitForCompletion();
+            return (T)asset;
+        }
+        return null;
     }
     public async UniTask GetDownloadSize(IEnumerable addressLabel)
     {

@@ -66,9 +66,9 @@ public class CookieClickerModel
 
     public void LoadCookieImage()
     {
-        //var cookieKey = "CookieImage_1";
-        //var cookieSprite = AddressableAssetLoadUtility.Instance.LoadAssetAsync<Sprite>(cookieKey);
-        //cookieImageSprite = cookieSprite;
+        var cookieKey = "CookieImage_1";
+        var cookieSprite = AddressableAssetLoadUtility.Instance.LoadAssetAsync<Sprite>(cookieKey);
+        cookieImageSprite = cookieSprite;
     }
 
 

@@ -61,15 +61,22 @@ public class CookieClickerPresenter : MonoBehaviour
 
     private void Update()
     {
+        if (Keyboard.current.aKey.isPressed)
+        {
+            Debug.Log("Aキーが押された");
+        }
+        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            Debug.Log("あああ");
+            var saveData = new PlayerSaveData(string.Empty, 0);
+            JsonSaveUtility.Save(saveData);
+            StartCoroutine(AddressableCacheClearUtility.Instance.StartCacheClear());
+        }
         if (stateMachine != null)
         {
             stateMachine.Update();
         }
 
-        if (Input.GetKeyDown(KeyCode.Delete))
-        {
-            StartCoroutine(AddressableCacheClearUtility.Instance.StartCacheClear());
-        }
     }
 
     /// <summary>
