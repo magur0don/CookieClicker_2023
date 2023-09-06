@@ -87,21 +87,6 @@ public class CookieClickerModel
         cookieClickCount = 0;
     }
 
-    public async UniTask Load()
-    {
-        LoadedAsset = false;
-        IEnumerable assetslabel = new object[]
-        {
-            "CookieImages",
-            "BGM",
-            "SE",
-        };
-        // ‚±‚±‚ÅUnitask‚ðŽg‚Á‚Ä‘Ò‚Â
-        await AddressableAssetLoadUtility.Instance.CheckCatalogUpdates();
-        await AddressableAssetLoadUtility.Instance.GetDownloadSize(assetslabel);
-        LoadedAsset = true;
-    }
-
     public void LoadCookieImage(int imageNumber)
     {
         var cookieKey = $"CookieImage_{imageNumber}";

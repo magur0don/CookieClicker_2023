@@ -9,20 +9,16 @@ public class InGameStateInit : InGameState
     {
     }
 
-    public override async void Enter()
+    public override void Enter()
     {
-        AudioManager.Instance.AudioLoad();
+        
         cookieClickerPresenter.cookieClickerModel = new CookieClickerModel();
         cookieClickerPresenter.cookieClickerModel.LoadCookieClickCount();
-        await cookieClickerPresenter.cookieClickerModel.Load();
+        stateMachine.ChangeState(cookieClickerPresenter.InGameStateStart);
     }
 
     public override void Update()
     {
-        if (cookieClickerPresenter.cookieClickerModel.LoadedAsset)
-        {
-            stateMachine.ChangeState(cookieClickerPresenter.InGameStateStart);
-        }
     }
 
     public override void Exit()

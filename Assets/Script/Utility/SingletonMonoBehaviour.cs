@@ -36,6 +36,7 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 
     public virtual void Awake()
     {
+        
         RemoveDuplicates();
     }
 

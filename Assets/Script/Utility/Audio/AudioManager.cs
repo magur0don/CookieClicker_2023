@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static AudioManager;
 
 public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
@@ -39,6 +38,9 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
     public override void Awake()
     {
+        Debug.Log("Ç±Ç±Ç∆Ç®ÇÈÇÊÇÀ");
+        DontDestroyOnLoad(this.gameObject);
+
         var audioSources = this.GetComponentsInChildren<AudioSource>();
         // AudioSourcesÇí«â¡Åv
         for (int i = 0; i < audioSources.Length; i++)
@@ -47,7 +49,8 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         }
     }
 
-    public void AudioLoad() {
+    public void AudioLoad()
+    {
 
         var seAudioClips = AddressableAssetLoadUtility.Instance.LoadAssetsAsync<AudioClip>("SE");
         SEAudioClips.AddRange(seAudioClips);
