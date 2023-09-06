@@ -25,15 +25,46 @@ public class CookieClickerModel
         }
     }
 
+    public bool LoadedAsset = false;
+
+    /// <summary>
+    /// 次のステージへのカウント
+    /// </summary>
+    public int NextStageCount = 10;
+
+    /// <summary>
+    /// ゲームクリア用のカウント
+    /// </summary>
+    public int GameClearCount = 100;
+
+
     public void AddCookieClickCount(int amount)
     {
         cookieClickCount += amount;
+        NextStageCount -= amount;
+        GameClearCount -= amount;
     }
 
     public void SaveCookieClickCount()
     {
         var saveData = new PlayerSaveData(string.Empty, cookieClickCount);
         JsonSaveUtility.Save(saveData);
+    }
+
+    public void ResetNextStageCount()
+    {
+        NextStageCount = 10;
+    }
+
+    public bool StageClear()
+    {
+        return NextStageCount == 0;
+    }
+
+    public bool GameClear()
+    {
+        Debug.Log(GameClearCount);
+        return GameClearCount == 0;
     }
 
     public void LoadCookieClickCount()
@@ -43,12 +74,19 @@ public class CookieClickerModel
         if (loadPlayerData != null)
         {
             cookieClickCount = loadPlayerData.PlayerScore;
+            GameClearCount -= cookieClickCount;
+
+            // cookieClickCountの10割ったあまり。
+            NextStageCount = 10 - (cookieClickCount % 10);
+            Debug.Log(NextStageCount);
+            if (NextStageCount == 0)
+            {
+                NextStageCount = 10;
+            }
             return;
         }
         cookieClickCount = 0;
     }
-
-    public bool LoadedAsset = false;
 
     public async UniTask Load()
     {
@@ -63,13 +101,10 @@ public class CookieClickerModel
         LoadedAsset = true;
     }
 
-
-    public void LoadCookieImage()
+    public void LoadCookieImage(int imageNumber)
     {
-        var cookieKey = "CookieImage_1";
+        var cookieKey = $"CookieImage_{imageNumber}";
         var cookieSprite = AddressableAssetLoadUtility.Instance.LoadAssetAsync<Sprite>(cookieKey);
         cookieImageSprite = cookieSprite;
     }
-
-
 }

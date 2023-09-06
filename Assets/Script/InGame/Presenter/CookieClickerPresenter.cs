@@ -58,25 +58,17 @@ public class CookieClickerPresenter : MonoBehaviour
         cookieClickerView.UpdateCookieCount(cookieClickerModel.GetcookieClickCount());
     }
 
+    public bool NextStage() {
+
+        return 0 == cookieClickerModel.GetcookieClickCount();
+    }
 
     private void Update()
     {
-        if (Keyboard.current.aKey.isPressed)
-        {
-            Debug.Log("Aキーが押された");
-        }
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
-        {
-            Debug.Log("あああ");
-            var saveData = new PlayerSaveData(string.Empty, 0);
-            JsonSaveUtility.Save(saveData);
-            StartCoroutine(AddressableCacheClearUtility.Instance.StartCacheClear());
-        }
         if (stateMachine != null)
         {
             stateMachine.Update();
         }
-
     }
 
     /// <summary>

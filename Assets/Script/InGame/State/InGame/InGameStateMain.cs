@@ -11,10 +11,18 @@ public class InGameStateMain : InGameState
 
     public override void Enter()
     {
+        var randomCookieNumber = Random.Range(0,10);
+        cookieClickerPresenter.cookieClickerModel.LoadCookieImage(randomCookieNumber);
+        cookieClickerPresenter.cookieClickerView.SetButtonImage(cookieClickerPresenter.cookieClickerModel.GetCookieImageSprite);
     }
 
     public override void Update()
     {
+        if (cookieClickerPresenter.cookieClickerModel.StageClear())
+        {
+            Debug.Log("ステージクリア");
+            stateMachine.ChangeState(cookieClickerPresenter.InGameStateResult);
+        }
     }
 
     public override void Exit()

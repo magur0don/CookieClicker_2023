@@ -11,11 +11,9 @@ public class InGameStateStart : InGameState
 
     public override void Enter()
     {
-        cookieClickerPresenter.cookieClickerModel.LoadCookieImage();
         cookieClickerPresenter.cookieClickerView = cookieClickerPresenter.gameObject.GetComponent<CookieClickerView>();
         cookieClickerPresenter.cookieClickerView.SetClickButtonAction(cookieClickerPresenter.OnClickCookie);
-        cookieClickerPresenter.cookieClickerView.SetButtonImage(cookieClickerPresenter.cookieClickerModel.GetCookieImageSprite);
-        cookieClickerPresenter.UpdateCookieUI();
+         cookieClickerPresenter.UpdateCookieUI();
         stateMachine.ChangeState(cookieClickerPresenter.InGameStateMain);
     }
 
