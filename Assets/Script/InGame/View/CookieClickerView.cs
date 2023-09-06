@@ -20,7 +20,8 @@ public class CookieClickerView : MonoBehaviour
     {
         clickButton.onClick.AddListener(() =>
         {
-           onClick.Invoke();
+            AudioManager.Instance.PlaySE(AudioManager.SETypes.Click);
+            onClick.Invoke();
         });
     }
 

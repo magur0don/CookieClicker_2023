@@ -102,6 +102,8 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - CookieImages
+    - BGM
+    - SE
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: ef7238003a721b04a853d07a0c401cfd, type: 2}

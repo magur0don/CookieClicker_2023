@@ -63,7 +63,6 @@ public class CookieClickerModel
 
     public bool GameClear()
     {
-        Debug.Log(GameClearCount);
         return GameClearCount == 0;
     }
 
@@ -93,7 +92,9 @@ public class CookieClickerModel
         LoadedAsset = false;
         IEnumerable assetslabel = new object[]
         {
-            "CookieImages"
+            "CookieImages",
+            "BGM",
+            "SE",
         };
         // ‚±‚±‚ÅUnitask‚ðŽg‚Á‚Ä‘Ò‚Â
         await AddressableAssetLoadUtility.Instance.CheckCatalogUpdates();

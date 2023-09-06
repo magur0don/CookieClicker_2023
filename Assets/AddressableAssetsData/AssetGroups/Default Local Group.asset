@@ -77,6 +77,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - CookieImages
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87ac9abb24ffd1e489bec2d5cd9004ae
+    m_Address: InGameBGM
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BGM
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c90fbf7b572f0f4b9ba8238ac11e5f7
+    m_Address: StartSceneBGM
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BGM
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8dca9a05ac11b944f84b504ed994d410
+    m_Address: Click
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SE
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ed9a07ad477d3994f85263ffb4e539c5, type: 2}
   m_SchemaSet:

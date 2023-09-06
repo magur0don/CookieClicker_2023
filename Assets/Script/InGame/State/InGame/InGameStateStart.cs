@@ -11,9 +11,10 @@ public class InGameStateStart : InGameState
 
     public override void Enter()
     {
+        AudioManager.Instance.PlayBGM(AudioManager.BGMTypes.InGame);
         cookieClickerPresenter.cookieClickerView = cookieClickerPresenter.gameObject.GetComponent<CookieClickerView>();
         cookieClickerPresenter.cookieClickerView.SetClickButtonAction(cookieClickerPresenter.OnClickCookie);
-         cookieClickerPresenter.UpdateCookieUI();
+        cookieClickerPresenter.UpdateCookieUI();
         stateMachine.ChangeState(cookieClickerPresenter.InGameStateMain);
     }
 

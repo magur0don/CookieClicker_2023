@@ -11,6 +11,7 @@ public class InGameStateInit : InGameState
 
     public override async void Enter()
     {
+        AudioManager.Instance.AudioLoad();
         cookieClickerPresenter.cookieClickerModel = new CookieClickerModel();
         cookieClickerPresenter.cookieClickerModel.LoadCookieClickCount();
         await cookieClickerPresenter.cookieClickerModel.Load();
