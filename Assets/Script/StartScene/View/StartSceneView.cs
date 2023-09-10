@@ -4,13 +4,12 @@ using UnityEngine.UI;
 public class StartSceneView : MonoBehaviour
 {
     [SerializeField]
-    private Button startButton;
+    private CookieClickerButton startButton;
 
     public void SetStartButton(UnityAction onClick)
     {
         startButton.onClick.AddListener(() =>
         {
-            AudioManager.Instance.PlaySE(AudioManager.SETypes.Click);
             onClick.Invoke();
         });
     }

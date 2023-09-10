@@ -1,9 +1,5 @@
-using Cysharp.Threading.Tasks;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
@@ -28,6 +24,8 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     {
         Invalide = -1,
         Click,
+        OK,
+        Fail
     }
     public enum BGMTypes
     {
@@ -38,11 +36,8 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
     public override void Awake()
     {
-        Debug.Log("こことおるよね");
-        DontDestroyOnLoad(this.gameObject);
-
         var audioSources = this.GetComponentsInChildren<AudioSource>();
-        // AudioSourcesを追加」
+        // AudioSourcesを追加
         for (int i = 0; i < audioSources.Length; i++)
         {
             AudioSources[i] = audioSources[i];
@@ -52,10 +47,12 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     public void AudioLoad()
     {
 
-        var seAudioClips = AddressableAssetLoadUtility.Instance.LoadAssetsAsync<AudioClip>("SE");
+        var seAudioClips =
+            AddressableAssetLoadUtility.Instance.LoadAssetsAsync<AudioClip>("SE");
         SEAudioClips.AddRange(seAudioClips);
 
-        var bgmAudioClips = AddressableAssetLoadUtility.Instance.LoadAssetsAsync<AudioClip>("BGM");
+        var bgmAudioClips =
+            AddressableAssetLoadUtility.Instance.LoadAssetsAsync<AudioClip>("BGM");
         BGMAudioClips.AddRange(bgmAudioClips);
     }
 
@@ -67,19 +64,27 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
     public void PlaySE(SETypes seType)
     {
+        var se = SEAudioClips.Find(clip => clip.name == seType.ToString());
+
+        if (se == null)
+        {
+            Debug.LogError("指定されたSEはありません");
+            return;
+        }
+
         if (!AudioSources[(int)AudioSourceTypes.SE_Primaly].isPlaying)
         {
-            AudioSources[(int)AudioSourceTypes.SE_Primaly].clip = SEAudioClips[(int)seType];
+            AudioSources[(int)AudioSourceTypes.SE_Primaly].clip = se;
             AudioSources[(int)AudioSourceTypes.SE_Primaly].Play();
             return;
         }
         // SE_Primalyは再生中なのでSE_Secondaryで再生する
         if (!AudioSources[(int)AudioSourceTypes.SE_Secondary].isPlaying)
         {
-            AudioSources[(int)AudioSourceTypes.SE_Secondary].clip = SEAudioClips[(int)seType];
+            AudioSources[(int)AudioSourceTypes.SE_Secondary].clip = se;
             AudioSources[(int)AudioSourceTypes.SE_Secondary].Play();
             return;
         }
-        Debug.LogError("再生できるオーディオ数を超えています＞＜");
+        Debug.LogError("再生できるオーディオ数を超えています");
     }
 }
