@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &122758672
@@ -1131,6 +1131,7 @@ GameObject:
   - component: {fileID: 1557567784}
   - component: {fileID: 1557567783}
   - component: {fileID: 1557567785}
+  - component: {fileID: 1557567786}
   m_Layer: 5
   m_Name: StartImage
   m_TagString: Untagged
@@ -1178,7 +1179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 83134ac71784190469c7f3355031eb2d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1240,6 +1241,27 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &1557567786
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557567780}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1818059893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,6 +1403,12 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 7169405256202440342, guid: 2fb2a805d8afaa14ba3181e2a864cc6b, type: 2}
     value: {fileID: 1906453257}
+  - key: {fileID: -4303746762788625238, guid: 2fb2a805d8afaa14ba3181e2a864cc6b, type: 2}
+    value: {fileID: 1557567786}
+  - key: {fileID: -5911044432434804351, guid: 2fb2a805d8afaa14ba3181e2a864cc6b, type: 2}
+    value: {fileID: 122758670}
+  - key: {fileID: 2970332752139441255, guid: 2fb2a805d8afaa14ba3181e2a864cc6b, type: 2}
+    value: {fileID: 1022169024}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1906453256
