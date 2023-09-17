@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.Events;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -11,29 +12,29 @@ using UnityEditor;
 public class CookieClickerButton : Button
 {
     private RectTransform rectTransform => GetComponent<RectTransform>();
-    
-        [SerializeField]
+
+    [SerializeField]
     public AudioManager.SETypes SEType;
+
+    public UnityAction Action;
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
         //rectTransform.DOPunchScale(new Vector3(1.2f, 1.2f, 1.2f), 1f);
-        rectTransform.DOShakePosition(
-    duration: 1f,   // 演出時間
-    strength: 5.5f  // シェイクの強さ
-);
-        //rectTransform.DOScale(new Vector3(1.2f, 1.2f, 1f),0.5f);
+        //rectTransform.DOShakePosition(duration: 1f,strength: 5.5f);
+        rectTransform.DOScale(new Vector3(1.2f, 1.2f, 1f), 0.5f);
     }
 
     public override void OnPointerExit(PointerEventData eventData)
     {
         // rectTransform.DOPunchScale(new Vector3(1.2f, 1.2f, 1.2f), 1f);
-        //rectTransform.DOScale(new Vector3(1f, 1, 1f), 0.5f);
+        rectTransform.DOScale(new Vector3(1f, 1, 1f), 0.5f);
     }
 
     public override void OnPointerClick(PointerEventData eventData)
     {
         AudioManager.Instance.PlaySE(SEType);
+        Action?.Invoke();
     }
 
 #if UNITY_EDITOR

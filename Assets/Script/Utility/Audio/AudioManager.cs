@@ -42,6 +42,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         {
             AudioSources[i] = audioSources[i];
         }
+        DontDestroyOnLoad(this);
     }
 
     public void AudioLoad()

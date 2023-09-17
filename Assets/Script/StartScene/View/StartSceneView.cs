@@ -8,11 +8,9 @@ public class StartSceneView : MonoBehaviour
 
     public void SetStartButton(UnityAction onClick)
     {
-        startButton.onClick.AddListener(() =>
-        {
-            onClick.Invoke();
-        });
+        startButton.Action = onClick;
     }
+
     public void SetStartButtonImage()
     {
         var sprite = AddressableAssetLoadUtility.Instance.LoadAssetAsync<Sprite>("CookieImage_1");
