@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class StartScenePresenter : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class StartScenePresenter : MonoBehaviour
         startSceneModel = new StartSceneModel();
         await startSceneModel.Load();
 
-        AudioManager.Instance.AudioLoad();
-        startSceneView.SetStartButtonImage();
+        await AudioManager.Instance.AudioLoad();
+        await startSceneView.SetStartButtonImage();
         AudioManager.Instance.PlayBGM(AudioManager.BGMTypes.Start);
         startSceneView.SetStartButton(() => LoadSceneUtility.Instance.StartLoadScene(LoadSceneUtility.SceneTypes.InGameScene));
     }

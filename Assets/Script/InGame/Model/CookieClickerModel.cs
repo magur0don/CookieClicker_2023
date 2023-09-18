@@ -87,10 +87,10 @@ public class CookieClickerModel
         cookieClickCount = 0;
     }
 
-    public void LoadCookieImage(int imageNumber)
+    public async UniTask LoadCookieImage(int imageNumber)
     {
         var cookieKey = $"CookieImage_{imageNumber}";
-        var cookieSprite = AddressableAssetLoadUtility.Instance.LoadAssetAsync<Sprite>(cookieKey);
-        cookieImageSprite = cookieSprite;
+        await AddressableAssetLoadUtility.Instance.LoadSpriteAssetAsync(cookieKey);
+        cookieImageSprite = AddressableAssetLoadUtility.Instance.ResultSprite;
     }
 }

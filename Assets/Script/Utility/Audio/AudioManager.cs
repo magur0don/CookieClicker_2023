@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,16 +46,13 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         DontDestroyOnLoad(this);
     }
 
-    public void AudioLoad()
+    public async UniTask AudioLoad()
     {
+        await AddressableAssetLoadUtility.Instance.LoadAudioAssetsAsync("SE");
+        SEAudioClips.AddRange(AddressableAssetLoadUtility.Instance.AudioClips);
 
-        var seAudioClips =
-            AddressableAssetLoadUtility.Instance.LoadAssetsAsync<AudioClip>("SE");
-        SEAudioClips.AddRange(seAudioClips);
-
-        var bgmAudioClips =
-            AddressableAssetLoadUtility.Instance.LoadAssetsAsync<AudioClip>("BGM");
-        BGMAudioClips.AddRange(bgmAudioClips);
+        await AddressableAssetLoadUtility.Instance.LoadAudioAssetsAsync("BGM");
+        BGMAudioClips.AddRange(AddressableAssetLoadUtility.Instance.AudioClips);
     }
 
     public void PlayBGM(BGMTypes bgmType)

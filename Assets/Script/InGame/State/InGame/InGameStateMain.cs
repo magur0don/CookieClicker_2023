@@ -9,10 +9,10 @@ public class InGameStateMain : InGameState
     {
     }
 
-    public override void Enter()
+    public override async void Enter()
     {
         var randomCookieNumber = Random.Range(0,10);
-        cookieClickerPresenter.cookieClickerModel.LoadCookieImage(randomCookieNumber);
+        await cookieClickerPresenter.cookieClickerModel.LoadCookieImage(randomCookieNumber);
         cookieClickerPresenter.cookieClickerView.SetButtonImage(cookieClickerPresenter.cookieClickerModel.GetCookieImageSprite);
     }
 

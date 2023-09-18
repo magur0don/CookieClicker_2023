@@ -5,7 +5,6 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Cysharp.Threading.Tasks;
-using System.Threading.Tasks;
 
 public class AddressableAssetLoadUtility : SingletonMonoBehaviour<AddressableAssetLoadUtility>
 {
@@ -19,28 +18,31 @@ public class AddressableAssetLoadUtility : SingletonMonoBehaviour<AddressableAss
 
     private AsyncOperationHandle<IResourceLocator> initializeResourceLocator = new AsyncOperationHandle<IResourceLocator>();
 
-    public T LoadAssetAsync<T>(string address) where T : Object
+    public Sprite ResultSprite = null;
+
+    public List<AudioClip> AudioClips = new List<AudioClip>();
+    public async UniTask LoadSpriteAssetAsync(string address)
     {
-        assetOperation = Addressables.LoadAssetAsync<T>(address);
+        assetOperation = Addressables.LoadAssetAsync<Sprite>(address);
         if (assetOperation.IsValid())
         {
-            var asset = assetOperation.WaitForCompletion();
-            return (T)asset;
+            await assetOperation.Task;
+            var sprite = assetOperation.Result as Sprite;
+            ResultSprite = sprite;
         }
-        return null;
     }
 
-
-    public List<T> LoadAssetsAsync<T>(string address) where T : Object
+    public async UniTask LoadAudioAssetsAsync(string address)
     {
-        assetOperation = Addressables.LoadAssetsAsync<T>(address, null);
-      
+        AudioClips.Clear();
+        assetOperation = Addressables.LoadAssetsAsync<AudioClip>(address, null);
+
         if (assetOperation.IsValid())
         {
-            var assets = assetOperation.WaitForCompletion();
-            return (List<T>)assets;
+            await assetOperation.Task;
+            var audioClips = assetOperation.Result as List<AudioClip>;
+            AudioClips = audioClips;
         }
-        return null;
     }
 
     public async UniTask GetDownloadSize(IEnumerable addressLabel)

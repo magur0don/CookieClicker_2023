@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -11,9 +13,9 @@ public class StartSceneView : MonoBehaviour
         startButton.Action = onClick;
     }
 
-    public void SetStartButtonImage()
-    {
-        var sprite = AddressableAssetLoadUtility.Instance.LoadAssetAsync<Sprite>("CookieImage_1");
-        startButton.image.sprite = sprite;
+    public async UniTask SetStartButtonImage()
+    { 
+        await AddressableAssetLoadUtility.Instance.LoadSpriteAssetAsync("CookieImage_1");
+        startButton.image.sprite = AddressableAssetLoadUtility.Instance.ResultSprite;
     }
 }
